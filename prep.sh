@@ -33,7 +33,7 @@ case "$docker_choice" in
   y|Y ) apt-cache madison docker-ce | cut -d "|" -f 2 && \
   echo 
   read -r -p "Which Docker version do you want to install (e.g. 18.05.0~ce~3-0~ubuntu)? " docker_version && \
-  sudo apt-get install -qy docker-ce="$docker_version";;
+  sudo apt-get install -qy --allow-downgrades docker-ce="$docker_version";;
   n|N );;
   * );;
 esac
@@ -59,7 +59,7 @@ echo "$installed_kuber_version is currently installed."
 read -r -p " Use latest Kubeadm version? (yes) " kuber_choice
 case "$kuber_choice" in
   n|N ) read -r -p "Which version of Kubernetes do you want to install (e.g. 1.10.2-00)? " kuber_version
-  sudo apt-get install -qy kubeadm="$kuber_version" kubectl="$kuber_version" kubelet="$kuber_version";;
+  sudo apt-get install -qy --allow-downgrades kubeadm="$kuber_version" kubectl="$kuber_version" kubelet="$kuber_version";;
   y|Y ) sudo apt-get install -qy kubeadm kubectl kubelet;;
 esac
 
