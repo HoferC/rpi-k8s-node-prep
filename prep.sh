@@ -11,7 +11,7 @@ curl -sSL get.docker.com | sh
 
 if uname -a | grep hypriot; then
 os_type=hypriot
-elif uname -a | grep raspbian; then
+elif uname -a | grep raspberrypi; then
 os_type=raspbian
 fi
 
