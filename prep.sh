@@ -58,7 +58,9 @@ installed_kuber_version=$(apt-cache policy kubeadm | grep "Installed" | cut -d "
 echo "$installed_kuber_version is currently installed."
 read -r -p " Use latest Kubeadm version? (yes) " kuber_choice
 case "$kuber_choice" in
-  n|N ) read -r -p "Which version of Kubernetes do you want to install (e.g. 1.10.2-00)? " kuber_version
+  n|N ) apt-cache madison kubeadm | cut -d "|" -f 2 && \
+  echo 
+  read -r -p "Which version of Kubernetes do you want to install (e.g. 1.10.2-00)? " kuber_version
   sudo apt-get install -qy --allow-downgrades kubeadm="$kuber_version" kubectl="$kuber_version" kubelet="$kuber_version";;
   y|Y ) sudo apt-get install -qy kubeadm kubectl kubelet;;
 esac
